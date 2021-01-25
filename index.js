@@ -27,6 +27,10 @@ client.on('message', function (message) {
 })
 
 client.on('guildMemberUpdate', function (oldMember, newMember) {
+    if (oldMember.roles.cache.size === newMember.roles.cache.size) {
+        return;
+    }
+
     if (IsUpdatingAnnounceIfStreamingRole(oldMember, newMember)) {
         return;
     }
@@ -76,5 +80,5 @@ function IsUpdatingAnnounceIfStreamingRole(oldMember, newMember) {
 
 function isPrivileged(role) {
     // At some point put this in a config setting
-    return role.name === 'Twitch Subscriber' || role.name === 'VIP';
+    return role.name === 'Twitch Subscriber' || role.name === 'VIP' || role.name === 'Streaming Right Now';
 }
