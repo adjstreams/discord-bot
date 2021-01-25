@@ -1,5 +1,4 @@
 {
-    "BOT_TOKEN": "token",
     "CHANNEL_ID": "757925081048416306",
     "ANNOUNCE_IF_STREAMING_ROLE": "Announce If Streaming"
 }

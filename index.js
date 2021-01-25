@@ -5,7 +5,7 @@ console.clear()
 console.log('\x1Bc')
 const client = new Discord.Client()
 
-client.login(config.BOT_TOKEN).catch(console.error)
+client.login(process.env.BOT_TOKEN).catch(console.error)
 
 const prefix = '!'
 
