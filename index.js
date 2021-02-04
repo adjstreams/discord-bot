@@ -1,6 +1,8 @@
+require('dotenv').config()
 const Discord = require('discord.js')
 const config = require('./config.json')
 const ping = require('./ping.js')
+
 console.clear()
 console.log('\x1Bc')
 const client = new Discord.Client()
@@ -32,6 +34,10 @@ client.on('guildMemberUpdate', function (oldMember, newMember) {
     }
 
     if (IsUpdatingAnnounceIfStreamingRole(oldMember, newMember)) {
+        return;
+    }
+
+    if (IsUpdatingStreamingRightNowRole(oldMember, newMember)) {
         return;
     }
 
@@ -77,6 +83,33 @@ function IsUpdatingAnnounceIfStreamingRole(oldMember, newMember) {
 
     return isUpdateStreamingRole;
 }
+
+function IsUpdatingStreamingRightNowRole(oldMember, newMember) {
+    let isUpdateStreamingRole = false;
+
+    if (oldMember.roles.cache.size > newMember.roles.cache.size) {
+        // Looping through the role and checking which role was removed.
+        oldMember.roles.cache.forEach((role) => {
+            if (!newMember.roles.cache.has(role.id)) {
+                if (role.name == config.STREAMING_RIGHT_NOW_ROLE) {
+                    isUpdateStreamingRole = true;
+                }
+            }
+        })
+    } else if (oldMember.roles.cache.size < newMember.roles.cache.size) {
+        // Looping through the role and checking which role was added.
+        newMember.roles.cache.forEach((role) => {
+            if (!oldMember.roles.cache.has(role.id)) {
+                if (role.name == config.STREAMING_RIGHT_NOW_ROLE) {
+                    isUpdateStreamingRole = true;
+                }
+            }
+        })
+    }
+
+    return isUpdateStreamingRole;
+}
+
 
 function isPrivileged(role) {
     // At some point put this in a config setting

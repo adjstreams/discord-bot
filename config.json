@@ -1,4 +1,6 @@
 {
     "CHANNEL_ID": "757925081048416306",
-    "ANNOUNCE_IF_STREAMING_ROLE": "Announce If Streaming"
+    "ANNOUNCE_IF_STREAMING_ROLE": "Announce If Streaming",
+    "STREAMING_RIGHT_NOW_ROLE": "Streaming Right Now"
+
 }
