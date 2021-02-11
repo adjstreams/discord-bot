@@ -29,6 +29,10 @@ client.on('message', function (message) {
 })
 
 client.on('guildMemberUpdate', function (oldMember, newMember) {
+    if (oldMember.user.username == "ADJStreams") {
+        return;
+    }
+    
     if (oldMember.roles.cache.size === newMember.roles.cache.size) {
         return;
     }
